@@ -1,5 +1,5 @@
 #reset ctrl+shift+f10
-rm()
+rm(list=ls())
 library(ape)
 library(ips)
 sarco.dna<-read.dna(file="sarco_seq.fasta", format = "fasta")
@@ -12,16 +12,8 @@ sarco.mafft.ng
 class(sarco.mafft.ng)
 image.DNAbin(sarco.mafft.ng)
 library(ape) # Analysis of phylogenetics and evolution
-library(ade4) # Analysis of ecological data, multivariate methods
-library(adegenet) # Exploratory analysis of genetic and genomic data
-library(pegas) # Population and evolutionary genetics
-# Population genetic analysis, including populations with mixed
-# reproduction
-library(poppr)
 library(hierfstat) # Hierarchical F-statistics
 library(corrplot) # Visualization of correlation matrix
-library(StAMPP) # Statistical analysis of mixed ploidy populations
-library(philentropy)
 # Create the distance matrix
 sarco.dist <- dist.dna(x=sarco.mafft.ng, model="TN93")
 # Check the resulting distance matrix
@@ -92,3 +84,22 @@ sarco.pal <- colorRampPalette(topo.colors(length(levels(as.factor(sarco.annot[["
 # Tip labels
 tiplabels(text=sarco.annot$accession, bg=num2col(sarco.annot$accession,
                                            col.pal=sarco.pal), cex=0.75)
+# Calculate bootstrap
+sarco.boot <- boot.phylo(phy=sarco.tree.rooted, x=sarco.dna, FUN=function(EEE) root.phylo(nj(dist.dna(EEE, model="TN93")), outgroup=1),B=1000)
+#Rooting and unrooting trees
+plot.phylo(sarco.nj)
+print.phylo(sarco.nj)
+sarco.nj.rooted <- root.phylo(phy=sarco.nj, interactive=TRUE)
+plot.phylo(sarco.nj.rooted)
+#Maximum parsimony
+library(phangorn)
+# Conversion to phyDat for phangorn
+sarco.phydat <-as.phyDat(sarco.mafft.ng)
+# Prepare starting tree
+sarco.tre.ini <- nj(dist.dna(x=sarco.mafft.ng, model="raw"))
+?parsimony # Parsimony details
+# Returns maximum parsimony score
+parsimony(tree=sarco.tre.ini,data=sarco.phydat)
+# Optimisation - returns MP tree
+sarco.tre.pars <- optim.parsimony(tree=sarco.tre.ini,data=sarco.phydat)
+plot.phylo(x=sarco.tre.pars,type="cladogram", edge.width=2)
