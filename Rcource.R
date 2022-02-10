@@ -85,7 +85,7 @@ sarco.pal <- colorRampPalette(topo.colors(length(levels(as.factor(sarco.annot[["
 tiplabels(text=sarco.annot$accession, bg=num2col(sarco.annot$accession,
                                            col.pal=sarco.pal), cex=0.75)
 # Calculate bootstrap
-sarco.boot <- boot.phylo(phy=sarco.tree.rooted, x=sarco.dna, FUN=function(EEE) root.phylo(nj(dist.dna(EEE, model="TN93")), outgroup=1),B=1000)
+sarco.boot <- boot.phylo(phy=sarco.tree, x=sarco.mafft.ng, FUN=function(EEE) nj(dist.dna(EEE, model="TN93")), B=1000)
 #Rooting and unrooting trees
 plot.phylo(sarco.nj)
 print.phylo(sarco.nj)
@@ -103,3 +103,6 @@ parsimony(tree=sarco.tre.ini,data=sarco.phydat)
 # Optimisation - returns MP tree
 sarco.tre.pars <- optim.parsimony(tree=sarco.tre.ini,data=sarco.phydat)
 plot.phylo(x=sarco.tre.pars,type="cladogram", edge.width=2)
+library(phangorn)
+as.phyDat(sarco.mafft.ng)
+modelTest(object=as.phyDat(sarco.mafft.ng), tree=nj(dist.dna(x=sarco.mafft.ng,model="raw")))
