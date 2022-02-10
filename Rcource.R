@@ -1,7 +1,9 @@
 #reset ctrl+shift+f10
 rm(list=ls())
-library(ape)
-library(ips)
+library(ape) # Analysis of phylogenetics and evolution
+library(hierfstat) # Hierarchical F-statistics
+library(corrplot) # Visualization of correlation matrix
+library(ips) #MAFFT is available here
 sarco.dna<-read.dna(file="sarco_seq.fasta", format = "fasta")
 sarco.dna
 class(sarco.dna)
@@ -11,23 +13,17 @@ sarco.mafft.ng<-deleteGaps(x=sarco.mafft,gap.max=nrow(sarco.mafft)/4)
 sarco.mafft.ng
 class(sarco.mafft.ng)
 image.DNAbin(sarco.mafft.ng)
-library(ape) # Analysis of phylogenetics and evolution
-library(hierfstat) # Hierarchical F-statistics
-library(corrplot) # Visualization of correlation matrix
+library(phangorn)
+as.phyDat(sarco.mafft.ng)
+modelTest(object=as.phyDat(sarco.mafft.ng), tree=nj(dist.dna(x=sarco.mafft.ng,model="raw")))
 # Create the distance matrix
 sarco.dist <- dist.dna(x=sarco.mafft.ng, model="TN93")
 # Check the resulting distance matrix
 sarco.dist
 class(sarco.dist)
 dim(as.matrix(sarco.dist))
-# Create another distance matrix
-sarco.dist1 <- dist.dna(x=sarco.mafft.ng, model="F81")
-# Check it
-sarco.dist1
-class(sarco.dist1)
-dim(as.matrix(sarco.dist1))
-class(sarco.dist1)
-table.paint(df=as.data.frame(as.matrix(sarco.dist1)), cleg=0, clabel.row=0.5, clabel.col=0.5)
+library(ade4) #Analysis of ecological data, multivariate methods
+table.paint(df=as.data.frame(as.matrix(sarco.dist)), cleg=0, clabel.row=0.5, clabel.col=0.5)
 # Same visualization, colored
 # heatmap() reorders values
 # because by default it plots
@@ -103,6 +99,3 @@ parsimony(tree=sarco.tre.ini,data=sarco.phydat)
 # Optimisation - returns MP tree
 sarco.tre.pars <- optim.parsimony(tree=sarco.tre.ini,data=sarco.phydat)
 plot.phylo(x=sarco.tre.pars,type="cladogram", edge.width=2)
-library(phangorn)
-as.phyDat(sarco.mafft.ng)
-modelTest(object=as.phyDat(sarco.mafft.ng), tree=nj(dist.dna(x=sarco.mafft.ng,model="raw")))
