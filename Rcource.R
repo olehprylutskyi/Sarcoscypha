@@ -3,16 +3,47 @@ rm(list=ls())
 library(ape) # Analysis of phylogenetics and evolution
 library(hierfstat) # Hierarchical F-statistics
 library(corrplot) # Visualization of correlation matrix
-library(ips) #MAFFT is available here
 sarco.dna<-read.dna(file="sarco_seq.fasta", format = "fasta")
 sarco.dna
 class(sarco.dna)
+
+## Multiple sequence alignment
+
+library(ips) #MAFFT is available here
+# Requires path to MAFFT binary - set it according to your installation
 sarco.mafft <- mafft(x=sarco.dna, method="localpair", maxiterate=100, options="--adjustdirection", exec="C:/Users/Mycolab-2017/Desktop/mafft-win/mafft")
 sarco.mafft
-sarco.mafft.ng<-deleteGaps(x=sarco.mafft,gap.max=nrow(sarco.mafft)/4)
+# Delete all columns containing at least 25% of gaps
+sarco.mafft.ng <- deleteGaps(x=sarco.mafft,gap.max=nrow(sarco.mafft)/4)
+# Delete every line (sample) containing at least 20% of missing data
+sarco.mafft.ng <- del.rowgapsonly(x=sarco.mafft.ng, threshold=0.2, freq.only=FALSE)
+# Delete every alignment position having at least 20% of missing data
+sarco.mafft.ng <- del.colgapsonly(x=sarco.mafft.ng, threshold=0.2, freq.only=FALSE)
 sarco.mafft.ng
 class(sarco.mafft.ng)
-image.DNAbin(sarco.mafft.ng)
+image.DNAbin(sarco.mafft.ng) # Plot the alignment
+# Check the alignment
+checkAlignment(x=sarco.mafft.ng, check.gaps=TRUE, plot=TRUE, what=1:4)
+library(adegenet)
+# Checking SNPs
+# Position of polymorphism within alignment - snpposi.plot() requires input data in form of matrix
+snpposi.plot(x=as.matrix(sarco.mafft.ng), codon=FALSE)
+# Position of polymorphism within alignment - differentiating codons
+snpposi.plot(as.matrix(sarco.mafft.ng))
+# When converting to genind object, only polymorphic loci are kept - threshold for polymorphism can be arbitrary (polyThres=...)
+sarco.genind <- DNAbin2genind(x=sarco.mafft.ng, polyThres=0.01)
+sarco.genind # See it
+# Check sequences
+# Nucleotide diversity
+pegas::nuc.div(x=sarco.mafft.ng)
+# Base frequencies
+ape::base.freq(x=sarco.mafft.ng)
+# GC content
+ape::GC.content(x=sarco.mafft.ng)
+# Number of times any dimer/trimer/etc oligomers occur in a sequence
+seqinr::count(seq=as.character.DNAbin(sarco.dna[["MZ227236"]]), wordsize=3)
+
+
 library(phangorn)
 as.phyDat(sarco.mafft.ng)
 modelTest(object=as.phyDat(sarco.mafft.ng), tree=nj(dist.dna(x=sarco.mafft.ng,model="raw")))
