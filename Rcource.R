@@ -25,6 +25,7 @@ image.DNAbin(sarco.mafft.ng) # Plot the alignment
 # Check the alignment
 checkAlignment(x=sarco.mafft.ng, check.gaps=TRUE, plot=TRUE, what=1:4)
 library(adegenet)
+
 # Checking SNPs
 # Position of polymorphism within alignment - snpposi.plot() requires input data in form of matrix
 snpposi.plot(x=as.matrix(sarco.mafft.ng), codon=FALSE)
@@ -63,7 +64,6 @@ heatmap(x=as.matrix(sarco.dist1), Rowv=NA, Colv=NA, symm=TRUE)
 # According to distance used
 # How to use hierarchical clustering
 #This is very basic function to make dendrogram
-?hclust
 plot(hclust(d=sarco.dist1, method="complete"))
 # Calculate it
 # Saving as phylo object (and not hclust) gives more
