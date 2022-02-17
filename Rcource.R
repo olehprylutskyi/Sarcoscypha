@@ -130,3 +130,5 @@ treeRatchet  <- acctran(treeRatchet, sarco.phydat) #assign branch length to the 
 plotBS(midpoint(treeRatchet), type="phylogram")
 
 #Maximum Likelihood-based
+tre.ini <- nj(dist.dna(dna,model="JC"))
+pml(tre.ini,sarco.phydat, k=4)
