@@ -43,7 +43,7 @@ ape::base.freq(x=sarco.mafft.ng)
 ape::GC.content(x=sarco.mafft.ng)
 # Number of times any dimer/trimer/etc oligomers occur in a sequence
 seqinr::count(seq=as.character.DNAbin(sarco.dna[["MZ227236"]]), wordsize=3)
-
+#Distance based methods
 ## Model selection
 
 library(phangorn)
@@ -105,3 +105,22 @@ plot.phylo(sarco.nj)
 print.phylo(sarco.nj)
 sarco.nj.rooted <- root.phylo(phy=sarco.nj, interactive=TRUE)
 plot.phylo(sarco.nj.rooted)
+fit = pml(sarco.tree, data=sarco.phydat)
+fit
+methods(class="pml")
+fitJC  <- optim.pml(fit, TRUE)
+logLik(fitJC) #With the default valuespml will estimate a Jukes-Cantor model
+# Calculate bootstrap
+bs = bootstrap.pml(fitJC, bs=100, optNni=TRUE,
+                   control = pml.control(trace = 0))
+plotBS(midpoint(fitJC$tree), bs, p = 50, type="p")
+#Parsimony 
+parsimony(sarco.upgma, sarco.phydat)
+parsimony(sarco.nj.rooted, sarco.phydat)
+#returns the parsimony score, that is the number of changes which are at least necessary to describe the data for a given tree
+#The tree rearrangement implemented are nearest-neighbor interchanges (NNI) and subtree pruning and regrafting (SPR).
+treePars  <- optim.parsimony(sarco.upgma, sarco.phydat) #performs tree rearrangements to find trees with a lower parsimony score
+treeRatchet  <- pratchet(sarco.phydat, trace = 0) #parsimony ratchet (Nixon 1999) implemented
+parsimony(c(treePars, treeRatchet), sarco.phydat)
+treeRatchet  <- acctran(treeRatchet, sarco.phydat) #assign branch length to the tree. The branch length are proportional to the number of substitutions / site.
+plotBS(midpoint(treeRatchet), type="phylogram")
