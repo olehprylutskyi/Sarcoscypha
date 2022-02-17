@@ -6,6 +6,7 @@ library(corrplot) # Visualization of correlation matrix
 sarco.dna<-read.dna(file="sarco_seq.fasta", format = "fasta")
 sarco.dna
 class(sarco.dna)
+annot <- read.csv("sarcoData.csv", header=TRUE, row.names=1) #read in the annotations
 
 ## Multiple sequence alignment
 
@@ -57,6 +58,8 @@ sarco.dist
 class(sarco.dist)
 dim(as.matrix(sarco.dist))
 
+#Claster Dendrogram
+
 library(ade4) #Analysis of ecological data, multivariate methods
 table.paint(df=as.data.frame(as.matrix(sarco.dist)), cleg=0, clabel.row=0.5, clabel.col=0.5)
 # Same visualization, colored
@@ -67,8 +70,10 @@ heatmap(x=as.matrix(sarco.dist), Rowv=NA, Colv=NA, symm=TRUE)
 #This is very basic function to make dendrogram
 plot(hclust(d=sarco.dist, method="complete")) #hierarchical clustering
 # Calculate it
-# Saving as phylo object (and not hclust) gives more
-# possibilities for further plotting and manipulations
+# Saving as phylo object (and not hclust) gives more possibilities for further plotting and manipulations
+
+#UPGMA
+
 sarco.upgma <- as.phylo(hclust(d=sarco.dist, method="average"))
 plot.phylo(x=sarco.upgma, cex=0.75)
 title("UPGMA tree") #looks ok, but the branch length is questionable
