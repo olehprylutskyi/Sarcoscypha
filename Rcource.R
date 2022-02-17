@@ -69,11 +69,10 @@ table.paint(df=as.data.frame(as.matrix(sarco.dist)), cleg=0, clabel.row=0.5, cla
 heatmap(x=as.matrix(sarco.dist), Rowv=NA, Colv=NA, symm=TRUE)
 #This is very basic function to make dendrogram
 plot(hclust(d=sarco.dist, method="complete")) #hierarchical clustering
-# Calculate it
-# Saving as phylo object (and not hclust) gives more possibilities for further plotting and manipulations
 
 #UPGMA
 
+# Saving as phylo object (and not hclust) gives more possibilities for further plotting and manipulations
 sarco.upgma <- as.phylo(hclust(d=sarco.dist, method="average"))
 plot.phylo(x=sarco.upgma, cex=0.75)
 title("UPGMA tree") #looks ok, but the branch length is questionable
