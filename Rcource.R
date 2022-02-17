@@ -68,6 +68,7 @@ table.paint(df=as.data.frame(as.matrix(sarco.dist)), cleg=0, clabel.row=0.5, cla
 # also dendrograms on the edges
 heatmap(x=as.matrix(sarco.dist), Rowv=NA, Colv=NA, symm=TRUE)
 #This is very basic function to make dendrogram
+par(mfrow=c(1,1))
 plot(hclust(d=sarco.dist, method="complete")) #hierarchical clustering
 
 #UPGMA
@@ -76,16 +77,15 @@ plot(hclust(d=sarco.dist, method="complete")) #hierarchical clustering
 sarco.upgma <- as.phylo(hclust(d=sarco.dist, method="average"))
 plot.phylo(x=sarco.upgma, cex=0.75)
 title("UPGMA tree") #looks ok, but the branch length is questionable
-# Test quality - tests correlation of original distance in the matrix
-# and reconstructed distance from hclust object
+#Test quality - tests correlation of original distance in the matrix and reconstructed distance from hclust object
 plot(x=as.vector(sarco.dist), y=as.vector(as.dist(
 cophenetic(sarco.upgma))), xlab="Original pairwise distances",
 ylab="Pairwise distances on the tree", main="Is UPGMA appropriate?", pch=20, col=transp(col="black",
                                      alpha=0.1), cex=2)
-# Add correlation line
-abline(lm(as.vector(as.dist(cophenetic(sarco.upgma)))~
-               as.vector(sarco.dist)), col="red")
+abline(lm(as.vector(as.dist(cophenetic(sarco.upgma)))~as.vector(sarco.dist)), col="red")
+
 #Neighbor-Joining tree
+
 # Test tree quality - plot original vs. reconstructed distance
 sarco.nj <- nj(sarco.dist)
 class(sarco.nj)
@@ -93,8 +93,7 @@ plot(as.vector(sarco.dist), as.vector(as.dist(cophenetic(sarco.nj))),
 xlab="Original distance", ylab="Reconstructed distance")
 abline(lm(as.vector(sarco.dist) ~
 as.vector(as.dist(cophenetic(sarco.nj)))), col="red")
-cor.test(x=as.vector(sarco.dist), y=as.vector(as.dist(cophenetic
-(sarco.nj))), alternative="two.sided") # Testing the correlation
+cor.test(x=as.vector(sarco.dist), y=as.vector(as.dist(cophenetic(sarco.nj))), alternative="two.sided") # Testing the correlation
 # Linear model for above graph
 summary(lm(as.vector(sarco.dist) ~
                as.vector(as.dist(cophenetic(sarco.nj))))) # Prints summary text
@@ -118,7 +117,9 @@ logLik(fitJC) #With the default valuespml will estimate a Jukes-Cantor model
 bs = bootstrap.pml(fitJC, bs=100, optNni=TRUE,
                    control = pml.control(trace = 0))
 plotBS(midpoint(fitJC$tree), bs, p = 50, type="p")
+
 #Maximum parsimony
+
 parsimony(sarco.upgma, sarco.phydat)
 parsimony(sarco.nj.rooted, sarco.phydat)
 #returns the parsimony score, that is the number of changes which are at least necessary to describe the data for a given tree
@@ -129,6 +130,24 @@ parsimony(c(treePars, treeRatchet), sarco.phydat)
 treeRatchet  <- acctran(treeRatchet, sarco.phydat) #assign branch length to the tree. The branch length are proportional to the number of substitutions / site.
 plotBS(midpoint(treeRatchet), type="phylogram")
 
-#Maximum Likelihood-based
-tre.ini <- nj(dist.dna(dna,model="JC"))
-pml(tre.ini,sarco.phydat, k=4)
+#Maximum parsimony 2
+
+tre.ini <- nj(dist.dna(sarco.mafft.ng,model="raw")) #reconstruct a tree
+tre.ini
+parsimony(tre.ini, sarco.phydat) #measure this tree’s parsimony
+sarco.pars <- optim.parsimony(tre.ini, sarco.phydat) #the most parsimonious possible tree
+sarco.pars
+parsimony(sarco.pars, sarco.phydat)
+library(ape)
+plot(sarco.pars, type="unr", edge.width=2)
+title("Maximum-parsimony tree")
+
+#Visualize a tree
+library(ggtree)
+library(TDbook)
+p <- ggtree(sarco.upgma) + geom_tiplab(size=3) #upgma
+msaplot(p, sarco.mafft.ng, offset=3, width=15)
+p <- ggtree(sarco.nj.rooted) + geom_tiplab(size=3) #nj
+msaplot(p, sarco.mafft.ng, offset=3, width=15)
+p <- ggtree(treeRatchet) + geom_tiplab(size=3) #Maximum parsimony
+msaplot(p, sarco.mafft.ng, offset=3, width=1)
