@@ -118,7 +118,7 @@ logLik(fitJC) #With the default valuespml will estimate a Jukes-Cantor model
 bs = bootstrap.pml(fitJC, bs=100, optNni=TRUE,
                    control = pml.control(trace = 0))
 plotBS(midpoint(fitJC$tree), bs, p = 50, type="p")
-#Parsimony 
+#Maximum parsimony
 parsimony(sarco.upgma, sarco.phydat)
 parsimony(sarco.nj.rooted, sarco.phydat)
 #returns the parsimony score, that is the number of changes which are at least necessary to describe the data for a given tree
@@ -128,3 +128,5 @@ treeRatchet  <- pratchet(sarco.phydat, trace = 0) #parsimony ratchet (Nixon 1999
 parsimony(c(treePars, treeRatchet), sarco.phydat)
 treeRatchet  <- acctran(treeRatchet, sarco.phydat) #assign branch length to the tree. The branch length are proportional to the number of substitutions / site.
 plotBS(midpoint(treeRatchet), type="phylogram")
+
+#Maximum Likelihood-based
