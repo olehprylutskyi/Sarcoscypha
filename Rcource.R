@@ -83,41 +83,43 @@ cophenetic(sarco.upgma))), xlab="Original pairwise distances",
 ylab="Pairwise distances on the tree", main="Is UPGMA appropriate?", pch=20, col=transp(col="black",
                                      alpha=0.1), cex=2)
 abline(lm(as.vector(as.dist(cophenetic(sarco.upgma)))~as.vector(sarco.dist)), col="red")
+cor.test(x=as.vector(sarco.dist), y=as.vector(as.dist(cophenetic(sarco.upgma))), alternative="two.sided") # Testing the correlation
 
 #Neighbor-Joining tree
 
-# Test tree quality - plot original vs. reconstructed distance
 sarco.nj <- nj(sarco.dist)
 class(sarco.nj)
-plot(as.vector(sarco.dist), as.vector(as.dist(cophenetic(sarco.nj))),
-xlab="Original distance", ylab="Reconstructed distance")
-abline(lm(as.vector(sarco.dist) ~
-as.vector(as.dist(cophenetic(sarco.nj)))), col="red")
-cor.test(x=as.vector(sarco.dist), y=as.vector(as.dist(cophenetic(sarco.nj))), alternative="two.sided") # Testing the correlation
-# Linear model for above graph
-summary(lm(as.vector(sarco.dist) ~
-               as.vector(as.dist(cophenetic(sarco.nj))))) # Prints summary text
 # Plot a basic tree
 plot.phylo(x=sarco.nj, type="phylogram")
-plot.phylo(x=sarco.nj, type="cladogram", edge.width=2) 
 sarco.tree <- nj(X=sarco.dist)
-plot.phylo(x=sarco.tree, type="unrooted", show.tip=FALSE)
+plot.phylo(x=sarco.tree, type="unrooted")
 title("Unrooted NJ tree")
 #Rooting and unrooting trees
 plot.phylo(sarco.nj)
 print.phylo(sarco.nj)
 sarco.nj.rooted <- root.phylo(phy=sarco.nj, interactive=TRUE)
 plot.phylo(sarco.nj.rooted)
-fit = pml(sarco.tree, data=sarco.phydat)
+# Test tree quality - plot original vs. reconstructed distance
+plot(x=as.vector(sarco.dist), y=as.vector(as.dist(
+  cophenetic(sarco.nj))), xlab="Original pairwise distances",
+  ylab="Pairwise distances on the tree", main="Is simple NJ appropriate?", pch=20, col=transp(col="black",
+                                                                                          alpha=0.1), cex=2)
+abline(lm(as.vector(as.dist(cophenetic(sarco.nj)))~as.vector(sarco.dist)), col="red")
+cor.test(x=as.vector(sarco.dist), y=as.vector(as.dist(cophenetic(sarco.nj))), alternative="two.sided") # Testing the correlation
+# Linear model for above graph
+summary(lm(as.vector(sarco.dist) ~
+               as.vector(as.dist(cophenetic(sarco.nj))))) # Prints summary text
+# Calculate bootstrap
+sarco.tree1 <- bionj(X=sarco.dist)
+fit = pml(sarco.tree1, data=sarco.phydat)
 fit
 methods(class="pml")
 fitJC  <- optim.pml(fit, TRUE)
-logLik(fitJC) #With the default valuespml will estimate a Jukes-Cantor model
-# Calculate bootstrap
-bs = bootstrap.pml(fitJC, bs=100, optNni=TRUE,
+logLik(fitJC)
+bs = bootstrap.pml(fitJC, bs=1000, optNni=TRUE,
                    control = pml.control(trace = 0))
 plotBS(midpoint(fitJC$tree), bs, p = 50, type="p")
-
+title("bioNJ tree + bootstrap values")
 #Maximum parsimony
 
 parsimony(sarco.upgma, sarco.phydat)
