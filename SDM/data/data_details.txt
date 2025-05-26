@@ -1,0 +1,21 @@
+iNaturalist search query: quality_grade=any&identifications=any&place_id=8860&taxon_id=49136&verifiable=true&spam=false
+
+GBIF download:  GBIF.org (19 May 2025) GBIF Occurrence Download https://doi.org/10.15468/dl.j3qx6j
+
+Download Information
+
+DOI: https://doi.org/10.15468/dl.j3qx6j (may take some hours before being active)
+Creation Date: 07:31:04 19 May 2025
+Records included: 777 records from 14 published datasets
+Compressed data size: 41.9 kB
+Download format: simple tab-separated values (TSV)
+Filter used:
+
+{
+  "and" : [
+    "Country is Ukraine",
+    "OccurrenceStatus is Present",
+    "TaxonKey is Sarcoscypha (Fr.) Boud."
+  ]
+}
+
