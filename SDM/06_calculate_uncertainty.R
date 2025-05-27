@@ -154,10 +154,15 @@ dat$variable <- c(
   "Needleleaved evergreen tree cover"
 )
 
+# Export variable contributions to csv
+write.csv(
+  dat,
+  file = paste0(outputdir, "/variable_importance.csv")
+)
 
 # Make variable importance plot
 varimp_p <- ggplot(
-  data = dat, 
+  data = dat,
   aes(x = reorder(variable, Min), ymin = Min, ymax = Max)
 ) +
   geom_pointrange(aes(y = Mean), colour = "#CC101F") +

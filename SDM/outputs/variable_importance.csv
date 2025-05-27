@@ -1,0 +1,14 @@
+"","variable","Min","Max","Mean","SE"
+"1","Mean diurnal air temperature range",0.0573,3.6852,1.125236,0.101081952725039
+"2","Precipitation seasonality",0.4879,3.6316,1.475709,0.0569431813407191
+"3","Mean monthly precipitation amount of the coldest quarter",0,1.7642,0.590471,0.0538342357611762
+"4","Enhanced Vegetation Index (summer)",5.2997,12.6156,8.532284,0.171881473941443
+"5","Enhanced Vegetation Index (winter)",1.8524,7.4612,4.292366,0.127080398501393
+"6","Frost change frequency",0.1066,3.1005,1.097458,0.097107767711232
+"7","Growing season length",3.4571,10.0724,6.663983,0.155523711044589
+"8","Mean monthly near-surface relative humidity",0.2105,5.4484,2.289827,0.125047278855647
+"9","Annual range of monthly near-surface relative humidity",1.6025,6.6286,3.899129,0.121989898739754
+"10","Normalized Difference Water Index (winter)",1.9626,5.8473,3.236376,0.0737996868970392
+"11","Snow cover days",0.0154,1.0451,0.386758,0.0327258558755593
+"12","Broadleaved deciduous tree cover",53.4739,65.8697,60.153236,0.264765834640668
+"13","Needleleaved evergreen tree cover",3.4009,8.7857,6.257144,0.108369841869909
