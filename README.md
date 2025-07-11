@@ -57,6 +57,8 @@ After that, we calculated model prediction, variables' contribution, and predict
 
 Final visualisations were made using the *ggplot2* R package v. 3.5 (Wickham, 2016). All calculations were performed using R 4.2.2 (R Core Team, 2024).
 
+![Predicted distribution of Sarcoscypha in Ukraine, prediction uncertainty, and key environmental drivers for its distribution](https://github.com/olehprylutskyi/Sarcoscypha/blob/main/SDM/outputs/publication_ready/Maxent_chelsa_plate.png)
+
 ## References
 Aiello-Lammens, M. E., Boria, R. A., Radosavljevic, A., Vilela, B., & Anderson, R. P. (2015). spThin: An R package for spatial thinning of species occurrence records for use in ecological niche models. Ecography, 38(5), 541–545. https://doi.org/10.1111/ecog.01132
 
