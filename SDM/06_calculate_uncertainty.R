@@ -40,7 +40,7 @@ names(covariates)
 # Get models
 # Get a list of all .Rdata files in the folder
 model_files <- list.files(
-  path = modeldir, 
+  path = modeldir,
   pattern = "Rdata"
 )
 modelPath <- file.path(modeldir, model_files)
@@ -116,11 +116,6 @@ long_vc <- pivot_longer(
   values_to = "var_contr" # new column name for variable values
 )
 
-# # Boxplot
-# ggplot(long_vc, aes(x = variable, y = var_contr)) +
-#   geom_boxplot() +
-#   coord_flip()
-
 # Min values
 MIN <- summaryBy(var_contr ~ variable, FUN = min, data = long_vc)
 # Max values
@@ -137,22 +132,6 @@ SE <- summaryBy(
 dat <- data.frame(MIN[1], MIN[2], MAX[2], MEAN[2], SE[2])
 names(dat) <- c("variable", "Min", "Max", "Mean", "SE")
 dat$variable
-
-dat$variable <- c(
-  "Mean diurnal air temperature range",
-  "Precipitation seasonality",
-  "Mean monthly precipitation amount of the coldest quarter",
-  "Enhanced Vegetation Index (summer)",
-  "Enhanced Vegetation Index (winter)",
-  "Frost change frequency",
-  "Growing season length",
-  "Mean monthly near-surface relative humidity",
-  "Annual range of monthly near-surface relative humidity",
-  "Normalized Difference Water Index (winter)",
-  "Snow cover days",
-  "Broadleaved deciduous tree cover",
-  "Needleleaved evergreen tree cover"
-)
 
 # Export variable contributions to csv
 write.csv(
@@ -288,7 +267,6 @@ writeRaster(
   overwrite = TRUE
 )
 
-
 # SDM Plate ####
 # # Read saved rasters
 # r_median <- raster(paste0(outputdir, "/pred_median_100rep.tiff"))
@@ -313,17 +291,20 @@ p_median_preds <- ggplot() +
   labs(
     x = "",
     y = "",
-    title = "(b)"
+    title = "B"
   ) +
   theme(
-    legend.title = element_text(size = 10),
-    legend.text = element_text(size = 9),
     axis.text = element_blank(),
     axis.ticks = element_blank(),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
     panel.background = element_blank(),
-    panel.border = element_blank()
+    panel.border = element_blank(),
+    legend.title = element_text(size = 9),
+    legend.text = element_text(size = 7),
+    legend.key.size = unit(0.5, 'cm'), #change legend key size
+    legend.key.height = unit(0.5, 'cm'), #change legend key height
+    legend.key.width = unit(0.5, 'cm') #change legend key width
   )
 
 # Show ensemble prediction
@@ -342,17 +323,20 @@ p_sd_preds <- ggplot() +
     option = "B"
   ) +
   labs(
-    x = "", y = "", title = "(c)"
+    x = "", y = "", title = "C"
   ) +
   theme(
-    legend.title = element_text(size = 10),
-    legend.text = element_text(size = 9),
     axis.text = element_blank(),
     axis.ticks = element_blank(),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
     panel.background = element_blank(),
-    panel.border = element_blank()
+    panel.border = element_blank(),
+    legend.title = element_text(size = 9),
+    legend.text = element_text(size = 7),
+    legend.key.size = unit(0.5, 'cm'), #change legend key size
+    legend.key.height = unit(0.5, 'cm'), #change legend key height
+    legend.key.width = unit(0.5, 'cm') #change legend key width
   )
 
 # Show prediction uncertainty
@@ -365,41 +349,68 @@ varimp_p <- ggplot(
 ) +
   geom_pointrange(
     aes(y = Mean),
-    colour = "#CC101F"
+    colour = "#CC101F",
+    size = 0.5, # size of mid-point
+    stroke = 0.5, # width of the shape border
+    shape = 1, # shape of the mid-point, an integer from 0 to 25
+    linewidth = 0.5 # line width
   ) +
   coord_flip() +
   scale_y_continuous(
     breaks = c(0, 50, 100)
   ) +
   labs(
-    title = "(a)",
+    title = "A",
     x = "",
     y = "Variable contribution, %",
-    caption = "* Mean (Min – Max)"
+    # caption = "* Mean (Min – Max)"
   ) +
   annotate(
     "text",  x = -Inf, y = 35, vjust = -5,
-    label = paste0("AUC = ", auc_mean, " (", auc_min, "–", auc_max, ")*"),
-    size = 4
+    # label = paste0("AUC = ", auc_mean, " (", auc_min, "–", auc_max, ")*"),
+    label = paste0("Mean AUC = ", auc_mean),
+    size = 3
   ) +
   theme(
    panel.grid.major = element_blank(),
    panel.grid.minor = element_blank(),
    panel.background = element_blank(),
    panel.border = element_rect(fill = NA),
-   axis.title.y = element_text(size = 10),
-   axis.title.x = element_text(size = 9)
+   axis.title.y = element_text(size = 9),
+   axis.title.x = element_text(size = 9),
+   # axis.text.x = element_text(size = 8),
+   # axis.text.y = element_text(size = 8)
   )
 
 
 varimp_p
 
 # Export the final plate
-png(
-  paste0(outputdir, "/publication_ready/Maxent_chelsa_plate.png"),
-  width = 230, height = 140, units = "mm", res = 300
+library(gridExtra)
+
+# Prepare layout
+layout <- rbind(
+  c(1, 2),
+  c(1, 3)
 )
-varimp_p + p_median_preds/p_sd_preds
+
+# Export the plate
+png(
+  paste0(
+    outputdir, 
+    "/publication_ready/Maxent_chelsa_plate.png"
+    ),
+  # width = 230, height = 140, units = "mm", res = 300
+  width = 175, height = 135, units = "mm", res = 300
+)
+
+# Arrange the plots:
+gridExtra::grid.arrange(
+  varimp_p, p_median_preds, p_sd_preds,
+  layout_matrix = layout,
+  widths = c(1, 2) # Left third, right two thirds
+)
+
 dev.off()
 
 # End of the script ####
