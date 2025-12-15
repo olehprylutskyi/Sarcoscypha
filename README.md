@@ -7,6 +7,13 @@ The repository includes the following:
 - Metadata describing the data sources and processing steps
 - Extended methodology for species distribution modelling
 
+# Morphology
+
+
+# Phylogenetic analysis
+
+
+
 # Species Disdistribution Modelling
 ## General information
 To explore environmental drivers for distribution of *Sarcoscypha* in Ukraine, we used species distribution modelling. Since morphological identification to a species level in the field is dubious, and both species are known to follow similar distributional pattern, we built a model at the genus level.
