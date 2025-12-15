@@ -8,10 +8,10 @@ The repository includes the following:
 - Extended methodology for species distribution modelling
 
 # Morphology
-
+Contains data on morphological traits measured for examined specimens and the script to test statistical differences between species.
 
 # Phylogenetic analysis
-
+Contains Supplementary Tables 1 and 2, summarised dta on specimens used for sequencing and environmental DNA samples, IQ-TREE results, and the phylogenetic tree in SVG format.
 
 
 # Species Disdistribution Modelling
