@@ -28,10 +28,13 @@ We obtained *Sarcoscypha* occurrence data (regardless of the species) from the â
 
 iNaturalist search query was:
 
+ ```
 quality_grade=any&identifications=any&place_id=8860&taxon_id=49136&verifiable=true&spam=false
+```
 
 GBIF search query was:
 
+```
 {
   "and" : [
     "Country is Ukraine",
@@ -39,6 +42,7 @@ GBIF search query was:
     "TaxonKey is Sarcoscypha (Fr.) Boud."
   ]
 }
+```
 
 All raw occurrence data are stored in the [*data*](https://github.com/olehprylutskyi/Sarcoscypha/tree/main/SDM/data/raw_occ_data) folder of this repository. The data were filtered to remove duplicates, records with unknown coordinates, and records with known coordinate uncertainty greater than 200 m. The final dataset included 298 unique occurrence records.
 
