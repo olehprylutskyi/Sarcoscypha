@@ -73,13 +73,13 @@ Final visualisations were made using the *ggplot2* R package v. 3.5 (Wickham, 20
 ![Predicted distribution of Sarcoscypha in Ukraine, prediction uncertainty, and key environmental drivers for its distribution](https://github.com/olehprylutskyi/Sarcoscypha/blob/main/SDM/outputs/publication_ready/Maxent_chelsa_plate.png)
 
 ## References
-Aiello-Lammens, M. E., Boria, R. A., Radosavljevic, A., Vilela, B., & Anderson, R. P. (2015). spThin: An R package for spatial thinning of species occurrence records for use in ecological niche models. Ecography, 38(5), 541–545. https://doi.org/10.1111/ecog.01132
+Aiello-Lammens, M. E., Boria, R. A., Radosavljevic, A., Vilela, B., & Anderson, R. P. (2015). spThin: An R package for spatial thinning of species occurrence records for use in ecological niche models. *Ecography*, 38(5), 541–545. https://doi.org/10.1111/ecog.01132
 
-Akinwande, M. O., Dikko, H. G., & Samson, A. (2015). Variance Inflation Factor: As a Condition for the Inclusion of Suppressor Variable(s) in Regression Analysis. Open Journal of Statistics, 5(7), Article 7. https://doi.org/10.4236/ojs.2015.57075
+Akinwande, M. O., Dikko, H. G., & Samson, A. (2015). Variance Inflation Factor: As a Condition for the Inclusion of Suppressor Variable(s) in Regression Analysis. *Open Journal of Statistics*, 5(7), Article 7. https://doi.org/10.4236/ojs.2015.57075
 
-GBIF.org. (2025). Genus Sarcoscypha. GBIF Occurrence Download [Dataset]. GBIF. https://doi.org/10.15468/dl.j3qx6j
+GBIF.org. (2025). Genus Sarcoscypha. GBIF Occurrence Download [Dataset]. *GBIF*. https://doi.org/10.15468/dl.j3qx6j
 
-Gorelick, N., Hancher, M., Dixon, M., Ilyushchenko, S., Thau, D., & Moore, R. (2017). Google Earth Engine: Planetary-scale geospatial analysis for everyone. Remote Sensing of Environment. https://doi.org/10.1016/j.rse.2017.06.031
+Gorelick, N., Hancher, M., Dixon, M., Ilyushchenko, S., Thau, D., & Moore, R. (2017). Google Earth Engine: Planetary-scale geospatial analysis for everyone. *Remote Sensing of Environment*. https://doi.org/10.1016/j.rse.2017.06.031
 
 Harper, K. L., Lamarche, C., Hartley, A., Peylin, P., Ottlé, C., Bastrikov, V., San Martín, R., Bohnenstengel, S. I., Kirches, G., Boettcher, M., Shevchuk, R., Brockmann, C., & Defourny, P. (2023). ESA Land Cover Climate Change Initiative (Land_Cover_cci): Global Plant Functional Types (PFT) Dataset, v2.0.8 [Application/xml]. NERC EDS Centre for Environmental Data Analysis. https://doi.org/10.5285/26A0F46C95EE4C29B5C650B129AAB788
 
@@ -89,15 +89,15 @@ Hijmans, R. J., Bivand, R., Pebesma, E., & Sumner, M. D. (2025). terra: Spatial 
 
 Hijmans, R. J., Phillips, S., Leathwick, J., & Elith, J. (2024). dismo: Species Distribution Modeling (Version 1.3-16) [Computer software]. https://CRAN.R-project.org/package=dismo
 
-Karger, D. N., Conrad, O., Böhner, J., Kawohl, T., Kreft, H., Soria-Auza, R. W., Zimmermann, N. E., Linder, H. P., & Kessler, M. (2017). Climatologies at high resolution for the earth’s land surface areas. Scientific Data, 4(1), Article 1. https://doi.org/10.1038/sdata.2017.122
+Karger, D. N., Conrad, O., Böhner, J., Kawohl, T., Kreft, H., Soria-Auza, R. W., Zimmermann, N. E., Linder, H. P., & Kessler, M. (2017). Climatologies at high resolution for the earth’s land surface areas. *Scientific Data*, 4(1), Article 1. https://doi.org/10.1038/sdata.2017.122
 
-Naimi, B., Hamm, N. A. S., Groen, T. A., Skidmore, A. K., & Toxopeus, A. G. (2014). Where is positional uncertainty a problem for species distribution modelling? Ecography, 37(2), 191–203. https://doi.org/10.1111/j.1600-0587.2013.00205.x
+Naimi, B., Hamm, N. A. S., Groen, T. A., Skidmore, A. K., & Toxopeus, A. G. (2014). Where is positional uncertainty a problem for species distribution modelling? *Ecography*, 37(2), 191–203. https://doi.org/10.1111/j.1600-0587.2013.00205.x
 
-Nilsson, H., Kessy Abarenkov, Leho Tedersoo, Kai Vellak, Irja Saar, Vilmar Veldre, Erast Parmasto, Marko Prous, Anne Aan, Margus Ots, Olavi Kurina, Ivika Ostonen, Janno Jõgeva, Siim Halapuu, Kadri Põldmaa, Märt Toots, Jaak Truu, Karl-Henrik Larsson, & Urmas Kõljalg. (2010). PlutoF—a Web Based Workbench for Ecological and Taxonomic Research, with an Online Implementation for Fungal ITS Sequences. Evolutionary Bioinformatics, 189. https://doi.org/10.4137/EBO.S6271
+Nilsson, H., Kessy Abarenkov, Leho Tedersoo, Kai Vellak, Irja Saar, Vilmar Veldre, Erast Parmasto, Marko Prous, Anne Aan, Margus Ots, Olavi Kurina, Ivika Ostonen, Janno Jõgeva, Siim Halapuu, Kadri Põldmaa, Märt Toots, Jaak Truu, Karl-Henrik Larsson, & Urmas Kõljalg. (2010). PlutoF—a Web Based Workbench for Ecological and Taxonomic Research, with an Online Implementation for Fungal ITS Sequences. *Evolutionary Bioinformatics*, 189. https://doi.org/10.4137/EBO.S6271
 
-Pebesma, E. J., & Bivand, R. S. (2005). Classes and methods for spatial data in R. R News, 5(2), 9–13.
+Pebesma, E. J., & Bivand, R. S. (2005). Classes and methods for spatial data in R. *R News*, 5(2), 9–13.
 
-Phillips, S. J., Anderson, R. P., & Schapire, R. E. (2006). Maximum entropy modeling of species geographic distributions. Ecological Modelling, 190(3–4), 231–259. https://doi.org/10.1016/j.ecolmodel.2005.03.026
+Phillips, S. J., Anderson, R. P., & Schapire, R. E. (2006). Maximum entropy modeling of species geographic distributions. *Ecological Modelling*, 190(3–4), 231–259. https://doi.org/10.1016/j.ecolmodel.2005.03.026
 
 Sillero, N., & Barbosa, A. M. (2021). Common mistakes in ecological niche models. *International Journal of Geographical Information Science*, 35(2), 213–226. https://doi.org/10.1080/13658816.2020.1798968
 
