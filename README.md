@@ -48,7 +48,7 @@ All raw occurrence data are stored in the [*data*](https://github.com/olehprylut
 
 To reduce both spatial bias and clustering in occurrence data, we performed a two-step spatial thinning procedure by (i) selecting only one occurrence point within each pixel of the covariate rasters; (ii) leaving only points separated from each other by no less than 5 km, using *thin()* function with 100 replications from *spThin* R package v. 0.2 (Aiello-Lammens et al., 2015). Within each replicate the algorithm iteratively selects a record (*spThin::thin.algorithm()*) and removes all other records within a 5 km radius; because selection is random we ran 100 replicates and retained the replicate with the largest number of records. After that procedure, 216 presence points were left for further analysis.
 
-Since we do not have true absence points, we employed the presence-background modelling method. For this purpose, we randomly generated 100 times more background points than we had presence points within Ukraine administrative boundary spatial polygon, covering the variation of environmental conditions in the area of modelling, using the *spsample()* function from *sp* R package v. 1.6 (Pebesma and Bivand, 2005). After removing duplicates, 20,916 background points were left.
+Since we do not have true absence points, we employed the presence-background modelling method. For this purpose, we randomly generated 100 times more background points than we had presence points within Ukraine administrative boundary spatial polygon, covering the variation of environmental conditions in the area of modelling, using the *spsample()* function from *sp* R package v. 1.6 (Pebesma and Bivand, 2005). Points which randomly fell into pixels where we had presence data were kept to ensure complete representation of a spectrum of the overall available conditions (Sillero & Barbosa, 2021). After removing duplicates, 20,916 background points were left.
 
 As covariates for the *Sarcoscypha* distribution model, we used CHELSA climatological variables (Karger et al., 2017) at a spatial resolution of 30 arcsec (~1 km). We selected 19 bioclimatic variables for current conditions (bio1–bio19, means of 1981–2010), as well as additional climatological covariates: annual range (cmi_range) and mean monthly (cmi_mean) climate moisture index, annual range (hurs_range) and mean monthly (hurs_mean) near-surface relative humidity, frost change frequency (fcf), annual number of days with snow cover (scd), and growing season length (gsl).
 
@@ -96,6 +96,8 @@ Nilsson, H., Kessy Abarenkov, Leho Tedersoo, Kai Vellak, Irja Saar, Vilmar Veldr
 Pebesma, E. J., & Bivand, R. S. (2005). Classes and methods for spatial data in R. R News, 5(2), 9–13.
 
 Phillips, S. J., Anderson, R. P., & Schapire, R. E. (2006). Maximum entropy modeling of species geographic distributions. Ecological Modelling, 190(3–4), 231–259. https://doi.org/10.1016/j.ecolmodel.2005.03.026
+
+Sillero, N., & Barbosa, A. M. (2021). Common mistakes in ecological niche models. *International Journal of Geographical Information Science*, 35(2), 213–226. https://doi.org/10.1080/13658816.2020.1798968
 
 R Core Team. (2024). R: A language and environment for statistical computing [Computer software]. Foundation for Statistical Computing. https://www.R-project.org/
 
