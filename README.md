@@ -14,9 +14,9 @@ Contains data on morphological traits measured for examined specimens and the sc
 Contains Supplementary Tables 1 and 2, summarised dta on specimens used for sequencing and environmental DNA samples, IQ-TREE results, and the phylogenetic tree in SVG format.
 
 
-# Species Disdistribution Modelling
+# Habitat Suitability Modelling
 ## General information
-To explore environmental drivers for distribution of *Sarcoscypha* in Ukraine, we used species distribution modelling. Since morphological identification to a species level in the field is dubious, and both species are known to follow similar distributional pattern, we built a model at the genus level.
+To explore environmental drivers for distribution of *Sarcoscypha* in Ukraine, we used habitat suitability (species distribution) modelling. Since morphological identification to a species level in the field is dubious, and both species are known to follow similar distributional pattern, we built a model at the genus level.
 
 We used the MaxEnt method (Phillips et al., 2006) to model the distribution of *Sarcoscypha* in Ukraine, based on presence-background data. The model was built using 13 environmental variables, including bioclimatic variables, vegetation indices, and tree cover data. The model was evaluated using the Area Under the Receiver Operating Characteristic Curve (AUC) metric. We derived prediction uncertainty as the standard deviation of predictions among 100 models. 
 
