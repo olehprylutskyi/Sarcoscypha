@@ -1,5 +1,5 @@
 # Sarcoscypha in Ukraine
-This repository contains the code, data, and extended methodology for the article "Distribution and ecology of genus *Sarcoscypha* in Ukraine: what can we learn from citizen science, morphology, barcoding, and eDNA?" by ..., published in *Czech Mycology* (2025). The article is available at [https://doi.org/10.33585/cmy.77206](https://doi.org/10.33585/cmy.77206).
+This repository contains the code, data, and extended methodology for the article "Distribution and ecology of genus *Sarcoscypha* in Ukraine: what can we learn from citizen science, morphology, barcoding, and eDNA?" by Yuliia Leshchenko, Oleh Prylutskyi, & Iryna Yatsiuk, published in *Czech Mycology* (2025). The article is available at [https://doi.org/10.33585/cmy.77206](https://doi.org/10.33585/cmy.77206).
 
 The repository includes the following:
 - R scripts for data analysis and visualisation
